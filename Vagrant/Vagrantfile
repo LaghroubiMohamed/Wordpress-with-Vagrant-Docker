@@ -1,0 +1,27 @@
+require 'yaml'
+configFile = "config.yaml"
+
+# Verify if the configuration file does exists or not  
+if File.file?(configFile)
+ configuration = YAML.load_file(configFile)
+else 
+	raise "Configuration file does not exists"
+end 
+
+IP = configuration["ip"]
+MEMORY = configuration["memory"]
+CPUS = configuration["cpus"]
+
+
+Vagrant.configure("2") do |config|
+    config.vm.hostname = "LaghroubiWp"
+    config.vm.box = "hashicorp/bionic64"
+    config.vm.provision :shell, path: "script.sh"
+    config.vm.network "forwarded_port", guest: 80, host: 8080
+    config.vm.network "private_network", ip: IP
+    config.vm.provider :virtualbox do |vb|
+        vb.name = 'LaghroubiMohamed'
+        vb.memory = MEMORY
+        vb.cpus = CPUS
+    end
+end
