@@ -30,7 +30,7 @@ It's recommended to use the following image for the application services :
 After running your services Wordpress should run on **http://localhost** :
 
 <div align="center">
-  <img  src="./wordpress.png"  />
+  <img  src="./images/wordpress.png"  />
 </div>
 
 ## Deploy wordpress with Vagrant
